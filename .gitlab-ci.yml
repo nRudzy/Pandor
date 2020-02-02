@@ -1,0 +1,38 @@
+# Cache downloaded dependencies and plugins between builds.
+# Not strictly necessary, but speeds up the builds.
+cache:
+  key: "$CI_JOB_NAME"
+  paths:
+    # Must be within the repository under test hence we can't use the
+    # default ~/.m2
+    - .m2/repository
+variables:
+  # Use the cached directory above.
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+stages:
+  - psql
+  - junit
+
+psql:
+  stage: psql
+  image: postgres
+  script:
+    - export PGPASSWORD=etudiant
+    - psql -h 192.168.74.221 -U etudiant -d test < ./src/bd/scriptBuild.sql
+    - psql -h 192.168.74.221 -U etudiant -d test < ./src/bd/scriptFill.sql
+  
+junit:
+  stage: junit
+  image: maven:3.6.1-jdk-11 # docker image with Maven
+  before_script:
+    # The runners on the forge need a proxy to access the web. mvn
+    # ignores the $http_proxy & friends variable => write a
+    # configuration file that does this for us.
+    - . setup-mvn-proxy.sh
+    # Useful only for debugging
+    #- cat ~/.m2/settings.xml
+  script:
+    - rm ./src/main/resources/META-INF/persistence.xml
+    - mv ./src/main/resources/META-INF/persistenceTest.xml ./src/main/resources/META-INF/persistence.xml
+    - mvn test --batch-mode

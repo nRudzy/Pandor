@@ -1,0 +1,38 @@
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+    <persistence-unit name="pu-pandor" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/> <!-- DB Driver -->
+
+<!--            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost/pandor"/>-->
+<!--            <property name="hibernate.connection.user" value="pg11516523"/>-->
+<!--            <property name="hibernate.connection.password" value="nae4eeFie3ob"/>-->
+
+            <property name="hibernate.connection.url"
+                      value="jdbc:postgresql://192.168.74.221:5432/final?useUnicode=yes&amp;characterEncoding=UTF-8" />
+            <property name="hibernate.connection.user" value="etudiant" />
+            <property name="hibernate.connection.password" value="etudiant" />
+
+
+<!--            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost/Pandor" />-->
+<!--            <property name="hibernate.connection.user" value="pg11707706" />-->
+<!--            <property name="hibernate.connection.password" value="ci4weiNg9ixa" />-->
+
+<!--            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost/pandor"/>-->
+<!--            <property name="hibernate.connection.user" value="gab"/>-->
+<!--            <property name="hibernate.connection.password" value="123456"/>-->
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/> <!-- DB Dialect -->
+            <property name="hibernate.hbm2ddl.auto" value="validate"/> <!-- create / create-drop / update -->
+
+            <property name="hibernate.show_sql" value="true"/> <!-- Show SQL in console -->
+            <property name="hibernate.format_sql" value="true"/> <!-- Show SQL formatted -->
+        </properties>
+
+    </persistence-unit>
+
+</persistence>

@@ -1,0 +1,31 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+        version="3.0">
+    <display-name>Pandor</display-name>
+
+    <filter-mapping>
+        <filter-name>CoFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>ModoFilter</filter-name>
+        <url-pattern>/Topic</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/AdministrationRubrique</url-pattern>
+        <url-pattern>/AdministrationUtilisateur</url-pattern>
+        <url-pattern>/Ban</url-pattern>
+        <url-pattern>/CreateRubrique</url-pattern>
+        <url-pattern>/CreerRubrique</url-pattern>
+    </filter-mapping>
+</web-app>
